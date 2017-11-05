@@ -4,7 +4,7 @@ import {getNews,getNewsSources} from '../lib/newsServices'
 const initState = {
   news: [],
   newsSourceList:[],
-  sourceName:{},
+  sourceName:{id: "abc-news-au",name: "ABC News (AU)",description: "Australia's most trusted source of local, national and world news. Comprehensive, independent, in-depth analysis, the latest business, sport, weather and more.",url: "http://www.abc.net.au/news"},
   newsType: ''
 }
 
@@ -19,9 +19,9 @@ export const loadNewsSources = (news) => ({type: SOURCE_LOAD, payload: news})
 export const updateNewsType = (val) => ({type:UPDATE_NEWS_TYPE, payload: val})
 export const updateSourceName = (val) => ({type:UPDATE_SOURCE_NAME, payload: val})
 
-export const fetchNews = () => {
+export const fetchNews = (id) => {
   return (dispatch) => {
-    getNews()
+    getNews(id)
       .then(news => dispatch(loadNews(news)))
   }
 }

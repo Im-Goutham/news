@@ -15,7 +15,7 @@ class App extends Component {
    };
  }
   componentDidMount() {
-    this.props.fetchNews();
+    this.props.fetchNews("the-next-web");
     this.props.fetchNewsSources();
   }
 
@@ -24,12 +24,20 @@ class App extends Component {
    this.setState({news});
  }
 
+ getNewsArticles({id}){
+   console.log("id is "+id);
+      let {fetchNews}=this.props;
+      fetchNews(id);
+ }
+
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   render() {
-    console.log("newsSourceList is .. "+JSON.stringify(this.props.newsSourceList));
     let {newsSourceList} = this.props;
+    if(newsSourceList.sources) {
+          console.log("newsSourceList is .. "+this.props.newsSourceList.sources.length);
+    }
     const { visible } = this.state
     return (
       <div>
@@ -39,7 +47,7 @@ class App extends Component {
               {
                  (newsSourceList.sources)?(
                      newsSourceList.sources.map((source,key)=>{
-                         return <Menu.Item name={source.id}>
+                         return <Menu.Item name={source.id} onClick={this.getNewsArticles.bind(this,source)}>
                             {source.name}
                           </Menu.Item>
                      })

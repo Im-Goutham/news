@@ -7,8 +7,8 @@ export const getNewsSources = () => {
 }
 
 
-export const getNews = () => {
-  let params = '?source=techcrunch&apiKey='+apiKey;
+export const getNews = (id) => {
+  let params = '?source='+id+'&apiKey='+apiKey;
   return fetch('https://newsapi.org/v1/articles'+params)
     .then(res => res.json())
 }

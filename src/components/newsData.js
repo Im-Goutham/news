@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react'
+import { Container,Image,Header } from 'semantic-ui-react'
 
 
 class NewsData extends Component {
@@ -7,19 +7,38 @@ class NewsData extends Component {
 	constructor(props, context){
     super(props, context);
     this.state = {
-
+        news: props.news
                  }
 
   }
 
 	render(){
-		var _this = this;
-    console.log("Hi..."+JSON.stringify(this.props.news));
-		 return (
-					 <Container style={{height:'100vh'}}>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.</p>
-						</Container>
-        );
+		 console.log("this.props.news is .. "+JSON.stringify(this.props.news));
+		 let {news} = this.props;
+		 if(!news.articles){
+			 return (
+					 <h1>Loading..</h1>
+			)
+		 }
+		 else {
+			 return (
+						 <Container>
+						   {
+								   news.articles.map((article,key)=>{
+										   return  <div key={key}>
+							 										<Header as='h3'>{article.title}</Header>
+							 										<Image src={article.urlToImage} fluid />
+							 										<Header as='h4'>{article.description}</Header>
+							 										<Header as='h5'>{article.author}</Header>
+							 										<Header as='h5'>2017-11-05T15:00:00Z</Header>
+							 								</div>
+									 })
+							 }
+							</Container>
+					);
+		 }
+
+
 	}
 }
 
