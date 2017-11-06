@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container,Image,Header } from 'semantic-ui-react'
+import { Loader,  Container,Image,Header, Segment } from 'semantic-ui-react'
 
 
 class NewsData extends Component {
@@ -17,7 +17,10 @@ class NewsData extends Component {
 		 let {news} = this.props;
 		 if(!news.articles){
 			 return (
-					 <h1>Loading..</h1>
+				 <Segment>
+						 <Loader active />
+						 <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+					</Segment>
 			)
 		 }
 		 else {
